@@ -23,7 +23,7 @@ public class GroupProject {
       int teams = TextIO.getlnInt();
 
       // Read csv
-      TextIO.readFile("fs.csv");
+      TextIO.readFile("fantasy2.csv");
       TextIO.getln();  // skip the line of headers...
       int cate = 0; // categories
 
