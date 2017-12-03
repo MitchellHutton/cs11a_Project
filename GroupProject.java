@@ -56,9 +56,15 @@ public class GroupProject {
         System.out.println("============");
         System.out.println("Round" + (i + 1);
         System.out.println("============");
+        for (int j = 0; j < teams; j++) {
+          Athletes(j);
+        }
       }
     }
-    public static void 
+    public static int Athletes(int j){
+
+      for(int i)
+    }
 
 
   }
