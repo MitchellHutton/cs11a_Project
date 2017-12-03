@@ -50,6 +50,17 @@ public class GroupProject {
 
       int rounds = 10; // number of players per team and rounds of the draft
       int[][] draftResults = new int[teams][rounds]; // 2D array for draft results
-  } // end of main
+    } // end of main
+    public static void Round(){
+      for(int i = 0; i< rounds; i++){
+        System.out.println("============");
+        System.out.println("Round" + (i + 1);
+        System.out.println("============");
+      }
+    }
+    public static void 
+
+
+  }
 
 } // end of class GroupProject
