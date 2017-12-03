@@ -50,7 +50,6 @@ public class GroupProject {
 
       int rounds = 10; // number of players per team and rounds of the draft
       int[][] draftResults = new int[teams][rounds]; // 2D array for draft results
-
   } // end of main
 
 } // end of class GroupProject
