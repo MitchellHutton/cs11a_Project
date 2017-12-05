@@ -1,7 +1,7 @@
 public class GroupProject {
   public static void main(String[] args) {
 
-      int csvLength = 413;
+      int csvLength = 412;
 
       String[] player = new String[csvLength];    // col 0
       String[] pos = new String[csvLength];       // col 1
@@ -50,23 +50,40 @@ public class GroupProject {
 
       int rounds = 10; // number of players per team and rounds of the draft
       int[][] draftResults = new int[teams][rounds]; // 2D array for draft results
-    } // end of main
-    public static void Round(){
+
+
+
+
       for(int i = 0; i< rounds; i++){
         System.out.println("============");
-        System.out.println("Round" + (i + 1);
+        System.out.println("Round" + (i + 1));
         System.out.println("============");
         for (int j = 0; j < teams; j++) {
-          Athletes(j);
+
+            System.out.println("Available players: ");
+            System.out.println("-----------");
+
+            for(int k = 0; k < player.length; k++) {
+
+                System.out.println(k + ": " + player[k] + pos[k] + team[k] + rebounds[k] + assists[k] + steals[k] + blocks[k] + points[k]);
+
+            }
+
+            System.out.printf("%nPlayer %d make your choice.",j+1);
+    				int selection = TextIO.getlnInt();
+
+    				while(player[selection].equals("-") || selection > player.length) {
+    					System.out.println("Invalid selection. Pick again.");
+    					selection = TextIO.getlnInt();
+    				}
+
+    				System.out.printf("%nUser %d selects %n",player[selection]);
+    				draftResults[j][i] = selection;
+    				player[selection] = "-";
+
         }
       }
-    }
-    public static int Athletes(int j){
 
-      for(int i)
-    }
+  } // end of main
 
-
-  }
-
-} // end of class GroupProject
+} // end of class
