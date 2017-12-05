@@ -13,6 +13,7 @@ public class GroupProject {
       int[] blocks = new int[csvLength];          // col 6
       int[] points = new int[csvLength];          // col 7
 
+      System.out.println();
       System.out.println("Welcome to the fantasy draft!!!!");
       System.out.println("This is a 4 team NBA fantasy draft.");
       System.out.println("The stats are Points, Steals, Blocks, Assists, and Rebounds.");
@@ -51,9 +52,6 @@ public class GroupProject {
       int rounds = 10; // number of players per team and rounds of the draft
       int[][] draftResults = new int[teams][rounds]; // 2D array for draft results
 
-
-
-
       for(int i = 0; i< rounds; i++){
         System.out.println("============");
         System.out.println("Round" + (i + 1));
@@ -72,7 +70,7 @@ public class GroupProject {
             System.out.printf("%nPlayer %d make your choice.",j+1);
     				int selection = TextIO.getlnInt();
 
-    				while(player[selection].equals("-") || selection > player.length) {
+    				while (player[selection].equals("-") || selection > player.length) {
     					System.out.println("Invalid selection. Pick again.");
     					selection = TextIO.getlnInt();
     				}
