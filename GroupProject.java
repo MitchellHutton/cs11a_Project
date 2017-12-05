@@ -15,7 +15,7 @@ public class GroupProject {
 
       System.out.println();
       System.out.println("Welcome to the fantasy draft!!!!");
-      System.out.println("This is a 4 team NBA fantasy draft.");
+      System.out.println("This is an NBA fantasy draft.");
       System.out.println("The stats are Points, Steals, Blocks, Assists, and Rebounds.");
       System.out.println("Good luck!");
       System.out.println();
@@ -47,6 +47,8 @@ public class GroupProject {
 
       } // end of while loop
 
+      TextIO.readStandardInput();
+
       int draftPool = cate;
 
       int rounds = 10; // number of players per team and rounds of the draft
@@ -60,22 +62,27 @@ public class GroupProject {
 
             System.out.println("Available players: ");
             System.out.println("-----------");
+            System.out.printf("%-2s %-25s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", "ID","Player", "Pos", "Team", "Rebounds", "Assists", "Steals", "Blocks", "Points");
 
             for(int k = 0; k < player.length; k++) {
 
-                System.out.println(k + ": " + player[k] + pos[k] + team[k] + rebounds[k] + assists[k] + steals[k] + blocks[k] + points[k]);
+                if (player[k].equals("-")) {
+                    System.out.println("-");
+                } else {
+                System.out.printf("%-2d: %-25s%-15s%-15s%-15d%-15d%-15d%-15d%-15d%n", k, player[k], pos[k], team[k], rebounds[k], assists[k], steals[k], blocks[k], points[k]);
+                }
 
             }
 
-            System.out.printf("%nPlayer %d make your choice.",j+1);
+            System.out.printf("%nPlayer %d make your choice.%n",j+1);
     				int selection = TextIO.getlnInt();
 
-    				while (player[selection].equals("-") || selection > player.length) {
+    				while (selection > player.length || player[selection].equals("-")) {
     					System.out.println("Invalid selection. Pick again.");
     					selection = TextIO.getlnInt();
     				}
 
-    				System.out.printf("%nUser %d selects %n",player[selection]);
+    				System.out.printf("%nUser selects %s %n",player[selection]);
     				draftResults[j][i] = selection;
     				player[selection] = "-";
 
