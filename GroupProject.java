@@ -89,7 +89,7 @@ public class GroupProject {
             System.out.printf("%n%nDraft Completed");
         		System.out.println("===============");
         		for(int i = 0; i < teams; i++) {
-        			System.out.println("Team " + i + ": ");
+        			System.out.printf("Team %d: ", i);
         			for(int j = 0; j < rounds; j++) {
         				System.out.println(player[draftResults[i][j]]);
         			}
