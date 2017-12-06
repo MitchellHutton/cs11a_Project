@@ -1,7 +1,7 @@
 public class GroupProject {
   public static void main(String[] args) {
 
-      int csvLength = 412;
+      int csvLength = 249;
 
       String[] player = new String[csvLength];    // col 0
       String[] pos = new String[csvLength];       // col 1
@@ -24,7 +24,7 @@ public class GroupProject {
       int teams = TextIO.getlnInt();
 
       // Read csv
-      TextIO.readFile("fantasy2.csv");
+      TextIO.readFile("fantasy.csv");
       TextIO.getln();  // skip the line of headers...
       int cate = 0; // categories
 
