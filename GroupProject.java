@@ -15,6 +15,12 @@ public class GroupProject {
 
       String[] playerTracker = new String[csvLength];
 
+      int[] reboundsTracker = new int[csvLength];
+      int[] assistsTracker = new int[csvLength];
+      int[] stealsTracker = new int[csvLength];
+      int[] blocksTracker = new int[csvLength];
+      int[] pointsTracker = new int[csvLength];
+
       System.out.println();
       System.out.println("Welcome to the NBA Fantasy Draft!!!!");
       System.out.printf("The stats are Points, Steals, Blocks, Assists, and Rebounds.%n%n");
@@ -30,6 +36,7 @@ public class GroupProject {
       TextIO.readFile("fantasy.csv");
       TextIO.getln();  // skip the line of headers...
       int cate = 0; // categories
+      int selectionCounter = 0;
 
       while (!TextIO.eof()) {
 
@@ -88,8 +95,15 @@ public class GroupProject {
     				System.out.printf("%nUser selects %s %n",player[selection]);
     				draftResults[j][i] = selection;
                     playerTracker[selection] = player[selection];
+                    reboundsTracker[selection] = rebounds[selection];
+                    assistsTracker[selection] = assists[selection];
+                    stealsTracker[selection] = steals[selection];
+                    blocksTracker[selection] = blocks[selection];
+                    pointsTracker[selection] = points[selection];
                     player[selection] = "-";
 
+
+            selectionCounter++;
 
         }
       }
@@ -104,9 +118,70 @@ public class GroupProject {
         System.out.println();
       }
 
-      
+      System.out.printf("%nScores");
+      System.out.printf("%n===============%n%n");
+      for (int n = 0; n < teams; n++) {
+
+          int pointsScore = 0;
+          int assistsScore = 0;
+          int reboundsScore = 0;
+          int blocksScore = 0;
+          int stealsScore = 0;
+
+          if (n == 0) {
+              System.out.printf("Team %d%n", n+1);
+          } else {
+              System.out.printf("%nTeam %d%n", n+1);
+          }
+
+          for (int p = n; p < selectionCounter; p+=teams) {
+
+              pointsScore += pointsTracker[p];
+              assistsScore += assistsTracker[p];
+              reboundsScore += reboundsTracker[p];
+              blocksScore += blocksTracker[p];
+              stealsScore += stealsTracker[p];
+
+          }
+
+          for (int q = n; q <= n; q++) {
+
+                  switch (n) {
+                    case 0: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 1: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 2: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 3: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 4: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 5: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 6: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 7: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 8: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 9: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 10: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    case 11: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    break;
+                    default: System.out.printf("End of scoring.");
+                }
 
 
+          }
+
+
+    }
+
+    System.out.println();
+    System.out.println();
 
   } // end of main
 
