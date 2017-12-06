@@ -86,6 +86,16 @@ public class GroupProject {
     				draftResults[j][i] = selection;
     				player[selection] = "-";
 
+            System.out.printf("%n%nDraft Completed");
+        		System.out.println("===============");
+        		for(int i = 0; i < teams; i++) {
+        			System.out.println("Team " + i + ": ");
+        			for(int j = 0; j < rounds; j++) {
+        				System.out.println(player[draftResults[i][j]]);
+        			}
+        			System.out.println();
+        		}
+
         }
       }
 
