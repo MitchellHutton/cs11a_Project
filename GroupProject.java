@@ -13,6 +13,8 @@ public class GroupProject {
       int[] blocks = new int[csvLength];          // col 6
       int[] points = new int[csvLength];          // col 7
 
+      String[] playerTracker = new String[csvLength];
+
       System.out.println();
       System.out.println("Welcome to the fantasy draft!!!!");
       System.out.println("This is an NBA fantasy draft.");
@@ -84,19 +86,21 @@ public class GroupProject {
 
     				System.out.printf("%nUser selects %s %n",player[selection]);
     				draftResults[j][i] = selection;
-    				player[selection] = "-";
 
-            System.out.printf("%n%nDraft Completed");
-        		System.out.println("===============");
-        		for(int l = 0; l < teams; l++) {
-        			System.out.printf("Team %d: ", l);
-        			for(int m = 0; m < rounds; m++) {
-        				System.out.println(player[draftResults[l][m]]);
-        			}
-        			System.out.println();
-        		}
+            player[selection] = "-";
+
 
         }
+      }
+
+      System.out.printf("%n%nDraft Completed");
+      System.out.println("===============");
+      for(int l = 0; l < teams; l++) {
+        System.out.printf("Team %d: ", l);
+        for(int m = 0; m < rounds; m++) {
+          System.out.println(player[draftResults[l][m]]);
+        }
+        System.out.println();
       }
 
   } // end of main
