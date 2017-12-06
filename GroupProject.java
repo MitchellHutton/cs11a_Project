@@ -16,9 +16,10 @@ public class GroupProject {
       String[] playerTracker = new String[csvLength];
 
       System.out.println();
-      System.out.println("Welcome to the fantasy draft!!!!");
-      System.out.println("This is an NBA fantasy draft.");
-      System.out.println("The stats are Points, Steals, Blocks, Assists, and Rebounds.");
+      System.out.println("Welcome to the NBA Fantasy Draft!!!!");
+      System.out.printf("The stats are Points, Steals, Blocks, Assists, and Rebounds.%n%n");
+      System.out.println("The score is calculated as follows:");
+      System.out.printf("Points: 1 pt, Steals: 4pts, Blocks: 4pts, Assists: 3 pts, Rebounds: 2pts%n%n");
       System.out.println("Good luck!");
       System.out.println();
 
@@ -77,31 +78,35 @@ public class GroupProject {
             }
 
             System.out.printf("%nPlayer %d make your choice.%n",j+1);
-    				int selection = TextIO.getlnInt();
+    			int selection = TextIO.getlnInt();
 
-    				while (selection > player.length || player[selection].equals("-")) {
-    					System.out.println("Invalid selection. Pick again.");
-    					selection = TextIO.getlnInt();
+    			while (selection > player.length || player[selection].equals("-")) {
+    			  System.out.println("Invalid selection. Pick again.");
+    			  selection = TextIO.getlnInt();
     				}
 
     				System.out.printf("%nUser selects %s %n",player[selection]);
     				draftResults[j][i] = selection;
-
-            player[selection] = "-";
+                    playerTracker[selection] = player[selection];
+                    player[selection] = "-";
 
 
         }
       }
 
       System.out.printf("%n%nDraft Completed");
-      System.out.println("===============");
+      System.out.printf("%n===============%n%n");
       for(int l = 0; l < teams; l++) {
-        System.out.printf("Team %d: ", l);
+        System.out.printf("Team %d:%n", l+1);
         for(int m = 0; m < rounds; m++) {
-          System.out.println(player[draftResults[l][m]]);
+          System.out.println(playerTracker[draftResults[l][m]]);
         }
         System.out.println();
       }
+
+      
+
+
 
   } // end of main
 
