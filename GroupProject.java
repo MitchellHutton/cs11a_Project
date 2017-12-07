@@ -118,6 +118,11 @@ public class GroupProject {
         System.out.println();
       }
 
+      int winner = 0;
+      int winningTeam = 0;
+      int teamOneScore;
+      int teamTwoScore;
+      int[] finalScores = new int[12];
       System.out.printf("%nScores");
       System.out.printf("%n===============%n%n");
       for (int n = 0; n < teams; n++) {
@@ -147,9 +152,13 @@ public class GroupProject {
           for (int q = n; q <= n; q++) {
 
                   switch (n) {
-                    case 0: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    case 0: teamOneScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
+                    System.out.printf("Score: %d", teamOneScore);
+                    finalScores[0] = teamOneScore;
                     break;
-                    case 1: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
+                    case 1: teamTwoScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
+                    System.out.printf("Score: %d", teamTwoScore);
+                    finalScores[1] = teamTwoScore;
                     break;
                     case 2: System.out.printf("Score: %d", pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4));
                     break;
@@ -182,6 +191,15 @@ public class GroupProject {
 
     System.out.println();
     System.out.println();
+
+    for (int r = 0; r<finalScores.length; r++){
+        if (finalScores[r] > winner){
+            winner = finalScores[r];
+            winningTeam = r+1;
+        }
+
+    }
+    System.out.printf("Team %d is the winner with a score of %d!!!%n",winningTeam,winner);
 
   } // end of main
 
