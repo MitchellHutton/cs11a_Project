@@ -1,226 +1,178 @@
+/**
+This program 
+*/
 public class GroupProject {
+
+  static int csvLength = 249;
+
+  static String[] player = new String[csvLength];    // col 0
+  static String[] pos = new String[csvLength];       // col 1
+  static String[] team = new String[csvLength];      // col 2
+
+  static int[] rebounds = new int[csvLength];        // col 3
+  static int[] assists = new int[csvLength];         // col 4
+  static int[] steals = new int[csvLength];          // col 5
+  static int[] blocks = new int[csvLength];          // col 6
+  static int[] points = new int[csvLength];          // col 7
+
+  static String[] playerTracker = new String[csvLength];
+
+  static int numberOfTeams = 0;
+  static int numberOfRounds = 10;
+
   public static void main(String[] args) {
-
-      int csvLength = 249;
-
-      String[] player = new String[csvLength];    // col 0
-      String[] pos = new String[csvLength];       // col 1
-      String[] team = new String[csvLength];      // col 2
-
-      int[] rebounds = new int[csvLength];        // col 3
-      int[] assists = new int[csvLength];         // col 4
-      int[] steals = new int[csvLength];          // col 5
-      int[] blocks = new int[csvLength];          // col 6
-      int[] points = new int[csvLength];          // col 7
-
-      String[] playerTracker = new String[csvLength];
-
-      int[] reboundsTracker = new int[csvLength];
-      int[] assistsTracker = new int[csvLength];
-      int[] stealsTracker = new int[csvLength];
-      int[] blocksTracker = new int[csvLength];
-      int[] pointsTracker = new int[csvLength];
-
       intro();
+      readData();
+      numberOfTeams = getUserInfo();
+      draft();
+  }
 
-}
+  public static void intro() {
+    System.out.println();
+    System.out.println("Welcome to the NBA Fantasy Draft!!!!");
+    System.out.printf("The stats are Points, Steals, Blocks, Assists, and Rebounds.%n%n");
+    System.out.println("The score is calculated as follows:");
+    System.out.printf("Points: 1 pt, Steals: 4pts, Blocks: 4pts, Assists: 3 pts, Rebounds: 2pts%n%n");
+    System.out.println("Good luck!");
+    System.out.println();
+  }
 
-      public static void intro() {
+  public static void readData() {
 
-        System.out.println();
-        System.out.println("Welcome to the NBA Fantasy Draft!!!!");
-        System.out.printf("The stats are Points, Steals, Blocks, Assists, and Rebounds.%n%n");
-        System.out.println("The score is calculated as follows:");
-        System.out.printf("Points: 1 pt, Steals: 4pts, Blocks: 4pts, Assists: 3 pts, Rebounds: 2pts%n%n");
-        System.out.println("Good luck!");
-        System.out.println();
+    TextIO.readFile("fantasy.csv"); // Read csv
+    TextIO.getln();  // skip the line of headers...
+    int cate = 0; // categories
 
-        getUserinfo();
+    while (!TextIO.eof()) {
 
+      String cell = TextIO.getln(); // read in the next cell from the file
+      String[] columns = cell.split(","); // split the columns apart
+
+      //establish categories (cate)
+      player[cate] = columns[0];
+      pos[cate] = columns[1];
+      team[cate] = columns[2];
+      rebounds[cate] = Integer.parseInt(columns[3]);
+      assists[cate] = Integer.parseInt(columns[4]);
+      steals[cate] = Integer.parseInt(columns[5]);
+      blocks[cate] = Integer.parseInt(columns[6]);
+      points[cate] = Integer.parseInt(columns[7]);
+
+      cate++; // increments the categories
+    } // end of while loop
+    TextIO.readStandardInput();
+  //Draft();
+  }
+
+  public static int getUserInfo() {
+    System.out.println("How many teams are in your draft? (12 Teams Max):");
+    int numberOfTeams = TextIO.getlnInt();
+    while (numberOfTeams > 12 || numberOfTeams <= 0) {
+          System.out.println("Invalid amount of teams! How many teams are in your draft?:");
+          numberOfTeams = TextIO.getlnInt();
+    }
+    return numberOfTeams;
+  }
+
+  public static void printPlayers() {
+    System.out.println("Available players: ");
+    System.out.println("-----------");
+    System.out.printf("%-2s %-25s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", "ID","Player", "Pos", "Team", "Rebounds", "Assists", "Steals", "Blocks", "Points");
+    for(int k = 0; k < player.length; k++) {
+      if (player[k].equals("-")) {
+          System.out.println("-");
+      } else {
+      System.out.printf("%-2d: %-25s%-15s%-15s%-15d%-15d%-15d%-15d%-15d%n", k, player[k], pos[k], team[k], rebounds[k], assists[k], steals[k], blocks[k], points[k]);
       }
+    }
+  }
 
-      public static int getUserinfo() {
+  public static void draft() {
+    int[][] draftResults = new int[numberOfTeams][numberOfRounds]; // 2D array for draft results
+    int selectionCounter = 0;
 
-        System.out.println("How many teams are in your draft? (12 Teams Max):");
-        int teams = TextIO.getlnInt();
+    for(int i = 0; i< numberOfRounds; i++){
+      System.out.println("============");
+      System.out.println("Round" + (i + 1));
+      System.out.println("============");
+      for (int j = 0; j < numberOfTeams; j++) {
+        printPlayers();
+        System.out.printf("%nPlayer %d make your choice.%n",j+1);
+  			int selection = TextIO.getlnInt();
 
-            while (teams > 12 || teams <= 0) {
+  			while (selection > player.length || player[selection].equals("-")) {
+  			  System.out.println("Invalid selection. Pick again.");
+  			  selection = TextIO.getlnInt();
+  			}
 
-                  System.out.println("Invalid amount of teams! How many teams are in your draft?:");
-                  teams = TextIO.getlnInt();
+        System.out.printf("%nUser selects %s %n",player[selection]);
+  			draftResults[j][i] = selection;
+        playerTracker[selection] = player[selection];
+        player[selection] = "-";
+        selectionCounter++;
+      }
+    }
+    draftComplete(draftResults);
+  }
 
-            }
+  public static void draftComplete(int[][] draftResults) {
+    System.out.printf("%n%nDraft Completed");
+    System.out.printf("%n===============%n%n");
 
-        return teams;
-
-        readData();
-
+    for(int l = 0; l < numberOfTeams; l++) {
+      System.out.printf("Team %d:%n", l+1);
+      for(int m = 0; m < numberOfRounds; m++) {
+        System.out.println(playerTracker[draftResults[l][m]]);
+      }
+      System.out.println();
     }
 
-    public static void readData() {
+    int count = 0;
+    int[] teamScores = new int[numberOfTeams];
+    System.out.printf("%nScores");
+    System.out.printf("%n===============%n%n");
+    for (int n = 0; n < numberOfTeams; n++) {
 
-      TextIO.readFile("fantasy.csv"); // Read csv
-      TextIO.getln();  // skip the line of headers...
-      int cate = 0; // categories
-      int selectionCounter = 0;
+        int[] teamPlayers = draftResults[n];
 
-      while (!TextIO.eof()) {
+        int pointsScore = 0;
+        int assistsScore = 0;
+        int reboundsScore = 0;
+        int blocksScore = 0;
+        int stealsScore = 0;
 
-        String cell = TextIO.getln(); // read in the next cell from the file
-        String[] columns = cell.split(","); // split the columns apart
-
-        //establish categories (cate)
-        player[cate] = columns[0];
-        pos[cate] = columns[1];
-        team[cate] = columns[2];
-        rebounds[cate] = Integer.parseInt(columns[3]);
-        assists[cate] = Integer.parseInt(columns[4]);
-        steals[cate] = Integer.parseInt(columns[5]);
-        blocks[cate] = Integer.parseInt(columns[6]);
-        points[cate] = Integer.parseInt(columns[7]);
-
-        cate++; // increments the categories
-
-      } // end of while loop
-
-      TextIO.readStandardInput();
-
-
-
-    //Draft();
-
-    }
-
-
-    /**
-
-    public static void Draft() {
-
-
-    int draftPool = cate;
-
-    int rounds = 10; // number of players per team and rounds of the draft
-    int[][] draftResults = new int[teams][rounds]; // 2D array for draft results
-
-
-        for(int i = 0; i< rounds; i++){
-          System.out.println("============");
-          System.out.println("Round" + (i + 1));
-          System.out.println("============");
-          for (int j = 0; j < teams; j++) {
-              System.out.println("Available players: ");
-              System.out.println("-----------");
-              System.out.printf("%-2s %-25s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", "ID","Player", "Pos", "Team", "Rebounds", "Assists", "Steals", "Blocks", "Points");
-              for(int k = 0; k < player.length; k++) {
-
-                  if (player[k].equals("-")) {
-                      System.out.println("-");
-                  } else {
-                  System.out.printf("%-2d: %-25s%-15s%-15s%-15d%-15d%-15d%-15d%-15d%n", k, player[k], pos[k], team[k], rebounds[k], assists[k], steals[k], blocks[k], points[k]);
-                  }
-              }
-
-
-              System.out.printf("%nPlayer %d make your choice.%n",j+1);
-      			int selection = TextIO.getlnInt();
-
-      			while (selection > player.length || player[selection].equals("-")) {
-      			  System.out.println("Invalid selection. Pick again.");
-      			  selection = TextIO.getlnInt();
-      				}
-
-                      System.out.printf("%nUser selects %s %n",player[selection]);
-      				draftResults[j][i] = selection;
-                      playerTracker[selection] = player[selection];
-                      reboundsTracker[selection] = rebounds[selection];
-                      assistsTracker[selection] = assists[selection];
-                      stealsTracker[selection] = steals[selection];
-                      blocksTracker[selection] = blocks[selection];
-                      pointsTracker[selection] = points[selection];
-                      player[selection] = "-";
-
-
-
-              selectionCounter++;
-
-          }
+        if (n == 0) {
+            System.out.printf("Team %d%n", n+1);
+        } else {
+            System.out.printf("%nTeam %d%n", n+1);
         }
 
-        draftComplete();
-
-    }
-
-    public static void draftComplete() {
-
-          System.out.printf("%n%nDraft Completed");
-          System.out.printf("%n===============%n%n");
-          for(int l = 0; l < teams; l++) {
-            System.out.printf("Team %d:%n", l+1);
-            for(int m = 0; m < rounds; m++) {
-              System.out.println(playerTracker[draftResults[l][m]]);
-            }
-            System.out.println();
-          }
-
-          int winner = 0;
-          int count = 0;
-          int[] teamScores = new int[teams];
-          System.out.printf("%nScores");
-          System.out.printf("%n===============%n%n");
-          for (int n = 0; n < teams; n++) {
-
-              int[] teamPlayers = draftResults[n];
-
-              int pointsScore = 0;
-              int assistsScore = 0;
-              int reboundsScore = 0;
-              int blocksScore = 0;
-              int stealsScore = 0;
-
-              if (n == 0) {
-                  System.out.printf("Team %d%n", n+1);
-              } else {
-                  System.out.printf("%nTeam %d%n", n+1);
-              }
-
-              for (int x = 0; x < teamPlayers.length; x++) {
-                pointsScore += pointsTracker[teamPlayers[x]];
-                assistsScore += assistsTracker[teamPlayers[x]];
-                reboundsScore += reboundsTracker[teamPlayers[x]];
-                blocksScore += blocksTracker[teamPlayers[x]];
-                stealsScore += stealsTracker[teamPlayers[x]];
-              }
-
-              int teamScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-
-              teamScores[n] = teamScore;
-              System.out.println(teamScore);
-
+        for (int x = 0; x < teamPlayers.length; x++) {
+          pointsScore += points[teamPlayers[x]];
+          assistsScore += assists[teamPlayers[x]];
+          reboundsScore += rebounds[teamPlayers[x]];
+          blocksScore += blocks[teamPlayers[x]];
+          stealsScore += steals[teamPlayers[x]];
         }
 
-        printWinner();
-
+        int teamScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
+        teamScores[n] = teamScore;
+        System.out.println(teamScore);
     }
+    printWinner(teamScores);
+  }
 
-    public static void printWinner() {
-
-        System.out.println();
-        System.out.println();
-
-        int winningTeamNumber = -1;
-
-        for(int r = 0; r < teamScores.length; r++){
-            if (teamScores[r] > winner){
-                winner = teamScores[r];
-                winningTeamNumber = r + 1;
-            }
-
+  public static void printWinner(int[] teamScores) {
+    System.out.println();
+    System.out.println();
+    int winningTeamNumber = -1;
+    int winner = -1;
+    for(int r = 0; r < teamScores.length; r++){
+        if (teamScores[r] > winner){
+            winner = teamScores[r];
+            winningTeamNumber = r + 1;
         }
-         System.out.printf("Team %d is the winner with a score of %d!!!%n", winningTeamNumber, winner);
-
     }
     System.out.printf("Team %d is the winner with a score of %d!!!%n", winningTeamNumber, winner);
-
-*/
-
-  } // end of class
+  }
+} // end of class
