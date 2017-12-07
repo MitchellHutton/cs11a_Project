@@ -126,22 +126,12 @@ public class GroupProject {
 
       int winner = 0;
       int count = 0;
-      int teamOneScore;
-      int teamTwoScore;
-      int teamThreeScore;
-      int teamFourScore;
-      int teamFiveScore;
-      int teamSixScore;
-      int teamSevenScore;
-      int teamEightScore;
-      int teamNineScore;
-      int teamTenScore;
-      int teamElevenScore;
-      int teamTwelveScore;
-      int[] finalScores = new int[12];
+      int[] teamScores = new int[teams];
       System.out.printf("%nScores");
       System.out.printf("%n===============%n%n");
       for (int n = 0; n < teams; n++) {
+
+          int[] teamPlayers = draftResults[n];
 
           int pointsScore = 0;
           int assistsScore = 0;
@@ -155,87 +145,34 @@ public class GroupProject {
               System.out.printf("%nTeam %d%n", n+1);
           }
 
-          for (int p = n; p < selectionCounter; p+=teams) {
-
-              pointsScore += pointsTracker[p];
-              assistsScore += assistsTracker[p];
-              reboundsScore += reboundsTracker[p];
-              blocksScore += blocksTracker[p];
-              stealsScore += stealsTracker[p];
-
+          for (int x = 0; x < teamPlayers.length; x++) {
+            pointsScore += pointsTracker[teamPlayers[x]];
+            assistsScore += assistsTracker[teamPlayers[x]];
+            reboundsScore += reboundsTracker[teamPlayers[x]];
+            blocksScore += blocksTracker[teamPlayers[x]];
+            stealsScore += stealsTracker[teamPlayers[x]];
           }
 
-          for (int q = n; q <= n; q++) {
+          int teamScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
 
-                  switch (n) {
-                    case 0: teamOneScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamOneScore);
-                    finalScores[0] = teamOneScore;
-                    break;
-                    case 1: teamTwoScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamTwoScore);
-                    finalScores[1] = teamTwoScore;
-                    break;
-                    case 2: teamThreeScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamThreeScore );
-                    finalScores[2] = teamThreeScore;
-                    break;
-                    case 3: teamFourScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamFourScore);
-                    finalScores[3] = teamFourScore;
-                    break;
-                    case 4: teamFiveScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamFiveScore);
-                    finalScores[4] = teamFiveScore;
-                    break;
-                    case 5: teamSixScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamSixScore);
-                    finalScores[5] = teamSixScore;
-                    break;
-                    case 6: teamSevenScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamSevenScore);
-                    finalScores[6] = teamSevenScore;
-                    break;
-                    case 7: teamEightScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamEightScore);
-                    finalScores[7] = teamEightScore;
-                    break;
-                    case 8: teamNineScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamNineScore);
-                    finalScores[8] = teamNineScore;
-                    break;
-                    case 9: teamTenScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamTenScore);
-                    finalScores[9] = teamTenScore;
-                    break;
-                    case 10: teamElevenScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamElevenScore);
-                    finalScores[10] = teamElevenScore;
-                    break;
-                    case 11: teamTwelveScore = pointsScore + (assistsScore*3) + (stealsScore*4) + (reboundsScore*2) + (blocksScore*4);
-                    System.out.printf("Score: %d", teamTwelveScore);
-                    finalScores[11] = teamTwelveScore;
-                    break;
-                    default: System.out.printf("End of scoring.");
-                }
-
-
-          }
-
+          teamScores[n] = teamScore;
+          System.out.println(teamScore);
 
     }
 
     System.out.println();
     System.out.println();
 
-    for (int r = 0; r<finalScores.length; r++){
-        if (finalScores[r] > winner){
-            winner = finalScores[r];
-            winningTeam = winner;
+    int winningTeamNumber = -1;
+
+    for(int r = 0; r < teamScores.length; r++){
+        if (teamScores[r] > winner){
+            winner = teamScores[r];
+            winningTeamNumber = r + 1;
         }
 
     }
-    System.out.printf("Team %d is the winner with a score of %d!!!%n",count,winner);
+    System.out.printf("Team %d is the winner with a score of %d!!!%n", winningTeamNumber, winner);
 
   } // end of main
 
