@@ -21,7 +21,6 @@ public class GroupProject {
       int[] blocksTracker = new int[csvLength];
       int[] pointsTracker = new int[csvLength];
 
-<<<<<<< HEAD
       intro();
 
 }
@@ -38,16 +37,6 @@ public class GroupProject {
 
         getUserinfo();
 
-=======
-      public static void intro(){
-      System.out.println();
-      System.out.println("Welcome to the NBA Fantasy Draft!!!!");
-      System.out.printf("The stats are Points, Steals, Blocks, Assists, and Rebounds.%n%n");
-      System.out.println("The score is calculated as follows:");
-      System.out.printf("Points: 1 pt, Steals: 4pts, Blocks: 4pts, Assists: 3 pts, Rebounds: 2pts%n%n");
-      System.out.println("Good luck!");
-      System.out.println();
->>>>>>> 18466fc63ed16a810a86b09914de428b49065872
       }
 
       public static int getUserinfo() {
@@ -230,15 +219,8 @@ public class GroupProject {
          System.out.printf("Team %d is the winner with a score of %d!!!%n", winningTeamNumber, winner);
 
     }
-<<<<<<< HEAD
-=======
     System.out.printf("Team %d is the winner with a score of %d!!!%n", winningTeamNumber, winner);
->>>>>>> 18466fc63ed16a810a86b09914de428b49065872
 
 */
 
-<<<<<<< HEAD
   } // end of class
-=======
-} // end of class
->>>>>>> 18466fc63ed16a810a86b09914de428b49065872
