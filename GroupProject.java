@@ -20,7 +20,9 @@ public class GroupProject {
       int[] stealsTracker = new int[csvLength];
       int[] blocksTracker = new int[csvLength];
       int[] pointsTracker = new int[csvLength];
-
+}
+}
+      public static void intro(){
       System.out.println();
       System.out.println("Welcome to the NBA Fantasy Draft!!!!");
       System.out.printf("The stats are Points, Steals, Blocks, Assists, and Rebounds.%n%n");
@@ -28,16 +30,19 @@ public class GroupProject {
       System.out.printf("Points: 1 pt, Steals: 4pts, Blocks: 4pts, Assists: 3 pts, Rebounds: 2pts%n%n");
       System.out.println("Good luck!");
       System.out.println();
-
+      }
+      public static int getUserinfo(){
       System.out.println("How many teams are in your draft? (12 Teams Max):");
       int teams = TextIO.getlnInt();
           while (teams > 12 || teams <= 0) {
               System.out.println("Invalid amount of teams! How many teams are in your draft?:");
               teams = TextIO.getlnInt();
-          }
+              return teams;
+            }
+        }
 
 
-      // Read csv
+      public static void read data(){ // Read csv
       TextIO.readFile("fantasy.csv");
       TextIO.getln();  // skip the line of headers...
       int cate = 0; // categories
@@ -65,6 +70,7 @@ public class GroupProject {
       TextIO.readStandardInput();
 
       int draftPool = cate;
+    }
 
       int rounds = 10; // number of players per team and rounds of the draft
       int[][] draftResults = new int[teams][rounds]; // 2D array for draft results
@@ -78,7 +84,7 @@ public class GroupProject {
             System.out.println("Available players: ");
             System.out.println("-----------");
             System.out.printf("%-2s %-25s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", "ID","Player", "Pos", "Team", "Rebounds", "Assists", "Steals", "Blocks", "Points");
-
+            public static void player(){
             for(int k = 0; k < player.length; k++) {
 
                 if (player[k].equals("-")) {
@@ -86,7 +92,7 @@ public class GroupProject {
                 } else {
                 System.out.printf("%-2d: %-25s%-15s%-15s%-15d%-15d%-15d%-15d%-15d%n", k, player[k], pos[k], team[k], rebounds[k], assists[k], steals[k], blocks[k], points[k]);
                 }
-
+              }
             }
 
             System.out.printf("%nPlayer %d make your choice.%n",j+1);
@@ -172,8 +178,8 @@ public class GroupProject {
         }
 
     }
-    System.out.printf("Team %d is the winner with a score of %d!!!%n", winningTeamNumber, winner);
+    /* System.out.printf("Team %d is the winner with a score of %d!!!%n", winningTeamNumber, winner);
 
   } // end of main
 
-} // end of class
+} // end of class */
