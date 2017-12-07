@@ -20,8 +20,7 @@ public class GroupProject {
       int[] stealsTracker = new int[csvLength];
       int[] blocksTracker = new int[csvLength];
       int[] pointsTracker = new int[csvLength];
-}
-}
+
       public static void intro(){
       System.out.println();
       System.out.println("Welcome to the NBA Fantasy Draft!!!!");
@@ -178,8 +177,8 @@ public class GroupProject {
         }
 
     }
-    /* System.out.printf("Team %d is the winner with a score of %d!!!%n", winningTeamNumber, winner);
+    System.out.printf("Team %d is the winner with a score of %d!!!%n", winningTeamNumber, winner);
 
   } // end of main
 
-} // end of class */
+} // end of class
